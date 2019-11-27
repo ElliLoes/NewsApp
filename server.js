@@ -1,6 +1,7 @@
 var express = require("express");
 var logger = require("morgan");
 var mongoose = require("mongoose");
+var exphbs = require("express-handlebars");
 
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
@@ -26,10 +27,21 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+app.set('index', __dirname + '/views');
+
 // Connect to the Mongo DB
 mongoose.connect("mongodb://localhost/NewsApp", { useNewUrlParser: true });
 
 // Routes
+
+app.get("/", function (req, res) {
+  db.Article.find({ saved: false }, function (err, result) {
+      if (err) throw err;
+      res.render("index", { result })
+  })
+});
 
 // A GET route for scraping the buzzfeed website
 app.get("/scrape", function(req, res) {
@@ -39,20 +51,16 @@ app.get("/scrape", function(req, res) {
     var $ = cheerio.load(response.data);
 
     // Now, we grab every h2 within an article tag, and do the following:
-    $("div.xs-px05").each(function(i, element) {
+    $("h2.xs-px05").each(function(i, element) {
       // Save an empty result object
-      var result = {};
+      var title = $(element).children().text();
+      var link = $(element).find("a").attr("href");
+      // var summary = $(element).
 
-      // Add the text and href of every link, and save them as properties of the result object
-      result.title = $(this)
-        .children("a")
-        .text();
-      result.link = $(this)
-        .children("a")
-        .attr("href");
-      result.subtitle = $(this)
-        .children("p")
-        .text();
+      results.push({
+        title: title,
+        link: link
+      });
 
       // Create a new Article using the `result` object built from scraping
       db.Article.create(result)
@@ -119,6 +127,15 @@ app.post("/articles/:id", function(req, res) {
       // If an error occurred, send it to the client
       res.json(err);
     });
+});
+
+pp.get("/saved", function (req, res) {
+  var savedArticles = [];
+  db.Article.find({ saved: true }, function (err, saved) {
+      if (err) throw err;
+      savedArticles.push(saved)
+      res.render("saved", { saved })
+  })
 });
 
 // Start the server

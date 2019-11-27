@@ -1,0 +1,49 @@
+<div class="container">
+        <div class="row">
+            <div class="col-md-12" id="titleDiv">
+                <h1 id="title">Buzzfeed Scraper</h1>
+            </div>
+        </div>
+        <div class="row" class="linkRow">
+            <div class="col-md-4">
+                <a href="/saved" class="upper-link">SAVED ARTICLES</a>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-primary btn-sm" id="scrapeBtn">SCRAPE</button>
+            </div>
+            <div class="col-md-4">
+                <a href="https://www.buzzfeed.com" class="upper-link">buzzfeed.com</a>
+            </div>
+        </div>
+    
+        <hr class="white-underline">
+        <div class="row">
+            {{#each result}}
+            {{#unless saved}}
+            <div class="col-md-6">
+    
+                <div class="article">
+                    <h2 class="headline">{{title}}</h2>
+                    <ul>
+                        <li class="summary">{{summary}}</li>
+                    </ul>
+                    <hr>
+                    <div class="row" id="bottom-row">
+                        <div class="col-md-6">
+                            <a href={{link}} class="link">FULL STORY</a>
+                        </div>
+                        <div class="col-md-6">
+                            <form action="/update" method="PUT" id="save-article">
+                                <input type="hidden" name="id" value={{_id}}>
+                                <button class="btn btn-lg" id="saveBtn" type="submit">SAVE ARTICLE</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+            {{/unless}}
+            {{/each}}
+        </div>
+    </div>
+    
