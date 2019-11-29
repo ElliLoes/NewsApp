@@ -129,7 +129,7 @@ app.post("/articles/:id", function(req, res) {
     });
 });
 
-pp.get("/saved", function (req, res) {
+app.get("/saved", function (req, res) {
   var savedArticles = [];
   db.Article.find({ saved: true }, function (err, saved) {
       if (err) throw err;
@@ -137,6 +137,37 @@ pp.get("/saved", function (req, res) {
       res.render("saved", { saved })
   })
 });
+
+app.put("/update/:id", function (req, res) {
+  db.Article.updateOne({ _id: req.params.id }, { $set: { saved: true } }, function (err, result) {
+      if (result.changedRows == 0) {
+          return res.status(404).end();
+      } else {
+          res.status(200).end();
+      }
+  });
+});
+app.put("/unsave/:id", function(req, res) {
+  db.Article.updateOne({ _id: req.params.id }, { $set: { saved: false }}, function(err, result) {
+      if (result.changedRows == 0) {
+          return res.status(404).end();
+      } else {
+          res.status(200).end();
+      }
+  })
+})
+
+app.put("/newnote/:id", function(req, res) {
+  db.Article.updateOne({ _id: req.body._id }, { $push: { note: req.body.note }}, function(err, result) {
+      console.log(result)
+      if (result.changedRows == 0) {
+          return res.status(404).end();
+      } else {
+          res.status(200).end();
+      } 
+  })
+})
+
 
 // Start the server
 app.listen(PORT, function() {
