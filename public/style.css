@@ -44,6 +44,7 @@ li {
     padding: 10px;
     color: rgb(29, 29, 27);
     background-color:#98FB98;
+    max-width: auto;
     border-radius: 3px;
     min-height: 600px;
     font-size: 1.25rem;

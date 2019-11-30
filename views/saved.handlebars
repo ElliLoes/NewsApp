@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" id="titleDiv">
+            <h1 id="title">News Scraper</h1>
+        </div>
+    </div>
+    <div class="row" class="linkRow">
+        <div class="col-md-4">
+            <a href="/saved" class="upper-link">SAVED ARTICLES</a>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-primary btn-sm" id="scrapeBtn">SCRAPE</button>
+        </div>
+        <div class="col-md-4">
+            <a href="https://news.ycombinator.com" class="upper-link">https://news.ycombinator.com</a>
+        </div>
+    </div>
+
+    <hr class="white-underline">
+    {{!-- Saved articles --}}
+    <div class="row">
+        <a href="/">Home</a>
+        <div class="col-md-12" id="saved">
+            {{#each saved}}
+            <div class="article">
+                <h2 class="headline">{{title}}</h2>
+                {{!-- <ul>
+                    <li>{{summaryOne}}</li>
+                </ul> --}}
+                <a href={{link}}>Full Story</a>
+                <form action="/unsave" method="PUT" id="delete-article">
+                    <input type="hidden" name="id" value={{_id}}>
+                    <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                    <hr />
+                </form>
+                {{#each notes}}
+                <div id="noteDiv">
+                    <input type="name" class="form-control" id="message_update_{{_id}}" value={{body}}>
+                    <button type="submit" data-id={{_id}} class="btn btn-primary note_update">Update Note</button>
+                    <button type="submit" data-id={{_id}} data-article-id={{../_id}} class="btn btn-primary note_delete">Delete Note</button>
+                </div>
+                {{/each}}
+                <hr />
+                <input type="name" class="form-control" id="message_{{_id}}">
+                <button type="submit" data-id={{_id}} class="btn btn-primary note">Submit Note</button>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
