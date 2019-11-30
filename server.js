@@ -39,7 +39,8 @@ mongoose.connect("mongodb://localhost/NewsApp", { useNewUrlParser: true });
 app.get("/", function (req, res) {
   db.Article.find({ saved: false }, function (err, result) {
       if (err) throw err;
-      res.render("index", { result })
+      res.render("index", { result, saved: [], note: [] })
+
   })
 });
 
