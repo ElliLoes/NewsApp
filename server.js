@@ -46,21 +46,25 @@ app.get("/", function (req, res) {
 // A GET route for scraping the buzzfeed website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with axios
-  axios.get("http://www.buzzfeed.com/").then(function(response) {
-    // Then, we load that into cheerio and save it to $ for a shorthand selector
+  // axios.get("http://www.buzzfeed.com/").then(function(response) {
+  axios.get("https://news.ycombinator.com/").then(function(response) {
+  // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
 
+    // document.querySelectorAll('tr[class="athing"]').forEach(elem => console.log(elem.querySelector('td[class="title"]')))
     // Now, we grab every h2 within an article tag, and do the following:
-    $("h2.xs-px05").each(function(i, element) {
+    $("tr.athing td.votelinks + td.title > a").each(function(i, element) {
       // Save an empty result object
-      var title = $(element).children().text();
-      var link = $(element).find("a").attr("href");
+      var title = $(element).text();
+      var link = $(element).attr("href");
       // var summary = $(element).
 
-      results.push({
+      var result = {
         title: title,
         link: link
-      });
+      };
+
+      console.log(result);
 
       // Create a new Article using the `result` object built from scraping
       db.Article.create(result)

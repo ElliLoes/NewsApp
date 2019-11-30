@@ -12,7 +12,7 @@
             <button class="btn btn-primary btn-sm" id="scrapeBtn">SCRAPE</button>
         </div>
         <div class="col-md-4">
-            <a href="https://www.buzzfeed.com" class="upper-link">buzzfeed.com</a>
+            <a href="https://news.ycombinator.com" class="upper-link">https://news.ycombinator.com</a>
         </div>
     </div>
 
@@ -29,7 +29,7 @@
                 <a href={{link}}>Full Story</a>
                 <form action="/unsave" method="PUT" id="delete-article">
                     <input type="hidden" name="id" value={{_id}}>
-                    <button class="btn btn-danger btn-sm" type="submit">DELETE</button>
+                    <button class="btn btn-danger btn-sm" type="submit">Delete</button>
                     <hr />
                 </form>
                 <form action="/newnote" method="PUT" id="new-note">
