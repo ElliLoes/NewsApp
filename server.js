@@ -55,7 +55,7 @@ app.get("/saved", function (req, res) {
   db.Article.find({ saved: true })
     .populate("notes")
     .then(function (unsaved) {
-      res.render("index", { unsaved })
+      res.render("saved", { unsaved })
     })
     .catch(function (err) {
       throw err;

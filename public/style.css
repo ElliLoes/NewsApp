@@ -1,7 +1,6 @@
 body {
-    /* background-color: rgb(29, 29, 27); */
+    background-color: rgb(29, 29, 27);
     font-family: "Roboto", monospace;
-    background-image: url("background.jpg")
 }
 
 .linkRow {
@@ -43,11 +42,15 @@ li {
     margin-top: 25px;
     padding: 10px;
     color: rgb(29, 29, 27);
-    background-color:#98FB98;
+    background-color:rgb(226, 226, 221);
     max-width: auto;
     border-radius: 3px;
-    min-height: 600px;
     font-size: 1.25rem;
+}
+
+.form-control {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 #scrapeBtn {
@@ -63,9 +66,9 @@ li {
 }
 
 #saveBtn {
-    text-align: center;
+    float: right;
     background-color: #00FF7F;
-    color: rgb(250, 250, 250);
+    color: rgb(29, 29, 27);
     font-weight: bolder;
 }
 
@@ -79,20 +82,28 @@ li {
 }
 
 #deleteBtn {
-    text-align: center;
+    float: right;
     background-color: rgb(255, 99, 120);
-    color: rgb(250, 250, 250);
     font-weight: bolder;
 }
+
+.btn-danger, .btn-primary {
+    color: rgb(29, 29, 27);
+};
 
 #deleteBtn:hover {
     color: white;
     background-color:rgb(224, 0, 30);
 }
 
+.note_delete, .note_update, .save {
+    background-color: #00FF7F;
+    border-color:#00FF7F;
+    color: rgb(29, 29, 27);
+}
+
 .headline {
-    font-family: "Noto Serif", serif;
-    font-size: 2.75rem;
+    font-family: "Roboto Mono";
     margin-bottom: 35px;
     margin-left: 15px;
     font-weight: bolder;
@@ -168,8 +179,4 @@ a:hover {
     font-size: 1.75rem;
     font-weight: bold;
     letter-spacing: 1.25rem;
-}
-
-.col-md-4 {
-    text-align: center;
 }

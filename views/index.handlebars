@@ -23,16 +23,12 @@
             {{#each unsaved}}
             <div class="article">
                 <h2 class="headline">{{title}}</h2>
-                {{!-- <ul>
-                    <li>{{summaryOne}}</li>
-                </ul> --}}
                 <a href={{link}}>Click here to read the full story</a>
                 <form action="/unsave" method="PUT" id="delete-article">
                     <input type="hidden" name="id" value={{_id}}>
                     <button class="btn btn-danger btn-sm" type="submit">Delete</button>
-                    <hr />
                 </form>
-                <button class="btn btn-danger btn-sm save" data-id={{_id}} type="submit">Save</button>
+                <button class="btn btn-danger btn-sm save" data-id={{_id}} type="submit">Save Article</button>
                 {{#each notes}}
                 <div id="noteDiv">
                     <input type="name" class="form-control" id="message_update_{{_id}}" value={{body}}>
@@ -40,7 +36,6 @@
                     <button type="submit" data-id={{_id}} data-article-id={{../_id}} class="btn btn-primary note_delete">Delete Note</button>
                 </div>
                 {{/each}}
-                <hr />
                 <input type="name" class="form-control" id="message_{{_id}}">
                 <button type="submit" data-id={{_id}} class="btn btn-primary note">Submit Note</button>
             </div>
